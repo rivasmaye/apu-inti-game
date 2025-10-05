@@ -3,6 +3,7 @@ import { GameButton } from "./GameButton";
 import { GameHUD } from "./GameHUD";
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import personaje from '../assets/muñeco.png';
+import mapaPeru from '../assets/mapaPeru.jpg';
 import { useLanguage } from "../context/LanguageContext";
 
 interface PeruMapProps {
@@ -72,15 +73,17 @@ export function PeruMap({ onNavigate }: PeruMapProps) {
     <div className="min-h-screen relative overflow-hidden">
       <GameHUD ecosystem={25} water={60} energy={40} biodiversity={30} sustainability={35} showCompass={true} />
 
+      {/* Fondo con imagen local */}
       <div className="absolute inset-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1580380598975-31777043edc7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+          src={mapaPeru}
           alt="Mapa satelital del Perú"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/20 via-transparent to-tierra/30"></div>
       </div>
 
+      {/* Huellas */}
       {footprints.map((fp, idx) => (
         <div key={idx} className="absolute z-10 select-none pointer-events-none" style={{ left: fp.left, top: fp.top, transform: `translate(-50%, -50%) rotate(${fp.rotate}deg) scale(${fp.scale})`, opacity: fp.opacity }}>
           <div className="relative drop-shadow-[0_0_8px_rgba(34,211,238,0.9)]">
@@ -90,6 +93,7 @@ export function PeruMap({ onNavigate }: PeruMapProps) {
         </div>
       ))}
 
+      {/* Personaje */}
       <div className="absolute z-20" style={{ left: characterPos.left, top: characterPos.top, transform: `translate(-50%, -50%) translateY(${characterPos.offsetY}px)` }}>
         <div className="relative">
           <img src={personaje} alt="Apu Inti" className="h-16 max-h-20 min-h-12 w-auto object-contain select-none pointer-events-none" />
@@ -97,12 +101,14 @@ export function PeruMap({ onNavigate }: PeruMapProps) {
         </div>
       </div>
 
+      {/* Título y subtítulo del mapa */}
       <div className="relative z-10 h-screen p-8 pt-32">
         <div className="text-center mb-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-tierra drop-shadow-lg mb-2">{t.peruMap.mapTitle}</h2>
-          <p className="text-lg text-tierra/80">{t.peruMap.chooseRegion}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white drop-shadow-[0_0_10px_rgba(0,0,0,0.7)] mb-2">{t.peruMap.mapTitle}</h2>
+          <p className="text-lg text-white drop-shadow-[0_0_6px_rgba(0,0,0,0.6)]">{t.peruMap.chooseRegion}</p>
         </div>
 
+        {/* Regiones */}
         <div className="relative h-96 max-w-4xl mx-auto">
           {regions.map((region) => (
             <div key={region.id} className="absolute transform -translate-x-1/2 -translate-y-1/2" style={{ left: `${region.leftP}%`, top: `${region.topP}%` }}>
@@ -131,6 +137,7 @@ export function PeruMap({ onNavigate }: PeruMapProps) {
           ))}
         </div>
 
+        {/* Botones fijos abajo */}
         <div className="absolute bottom-8 left-8 right-8 flex justify-between">
           <GameButton variant="secondary" onClick={() => onNavigate('menu')}>{t.peruMap.mainMenuBtn}</GameButton>
           <GameButton variant="primary" onClick={() => onNavigate('nasa')}>{t.peruMap.nasaBtn}</GameButton>
