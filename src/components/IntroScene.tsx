@@ -2,23 +2,18 @@ import React, { useState, useEffect } from "react";
 import { GameButton } from "./GameButton";
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import personaje from '../assets/muñeco.png';
+import { useLanguage } from "../context/LanguageContext";
 
 interface IntroSceneProps {
   onNavigate: (scene: string) => void;
 }
 
 export function IntroScene({ onNavigate }: IntroSceneProps) {
+  const { t } = useLanguage(); // Contexto de idioma
   const [currentText, setCurrentText] = useState(0);
   const [showContinue, setShowContinue] = useState(false);
 
-  const storyTexts = [
-    "En las altas montañas de los Andes, donde los antiguos dioses vigilan el equilibrio del mundo...",
-    "Un joven cholito llamado Apu Inti recibe una visión del Oráculo Celeste.",
-    "Los satélites de la NASA han detectado que el equilibrio ambiental del Perú está en peligro.",
-    "La costa se está secando, las montañas pierden su nieve, y la selva se está fragmentando.",
-    "Solo tú puedes restaurar la armonía entre la Pachamama y los datos del cielo.",
-    "¡Acepta esta misión sagrada y conviértete en el Guardián del Perú!"
-  ];
+  const storyTexts = t.introScene.storyTexts;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,7 +32,7 @@ export function IntroScene({ onNavigate }: IntroSceneProps) {
       {/* Background */}
       <div className="absolute inset-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1670215945174-3b5c2f22aa8e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxQZXJ1JTIwbGFuZHNjYXBlJTIwQW5kZXMlMjBtb3VudGFpbnN8ZW58MXx8fHwxNzU5NjE4OTY1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+          src="https://images.unsplash.com/photo-1670215945174-3b5c2f22aa8e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
           alt="Cordillera Andina"
           className="w-full h-full object-cover"
         />
@@ -56,17 +51,13 @@ export function IntroScene({ onNavigate }: IntroSceneProps) {
       {/* Character illustration */}
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20">
         <div className="relative">
-          {/* Character silhouette */}
           <div className="w-32 h-48 bg-gradient-to-t from-tierra/80 to-primary/60 rounded-t-full relative">
             <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
               <img src={personaje} alt="Apu Inti" className="h-12 w-auto object-contain select-none pointer-events-none" />
             </div>
-            {/* Traditional poncho pattern */}
             <div className="absolute inset-x-4 top-16 h-8 bg-gradient-to-r from-primary via-accent to-secondary opacity-80 rounded"></div>
             <div className="absolute inset-x-6 top-20 h-2 bg-tierra/60 rounded"></div>
           </div>
-          
-          {/* Mystical aura */}
           <div className="absolute -inset-8 bg-gradient-radial from-primary/20 via-accent/10 to-transparent rounded-full animate-pulse"></div>
         </div>
       </div>
@@ -110,7 +101,7 @@ export function IntroScene({ onNavigate }: IntroSceneProps) {
                 onClick={() => onNavigate('map')}
                 className="animate-pulse"
               >
-                🌄 Comenzar Aventura
+                {t.introScene.startAdventure}
               </GameButton>
               
               <div className="flex gap-4 justify-center">
@@ -119,7 +110,7 @@ export function IntroScene({ onNavigate }: IntroSceneProps) {
                   size="md"
                   onClick={() => onNavigate('menu')}
                 >
-                  ← Volver al Menú
+                  {t.introScene.backToMenu}
                 </GameButton>
                 
                 <GameButton 
@@ -127,7 +118,7 @@ export function IntroScene({ onNavigate }: IntroSceneProps) {
                   size="md"
                   onClick={() => setCurrentText(0)}
                 >
-                  🔄 Ver Otra Vez
+                  {t.introScene.replay}
                 </GameButton>
               </div>
             </div>

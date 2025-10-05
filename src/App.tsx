@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { LanguageProvider } from './context/LanguageContext'; // <-- Importa el provider
 import { MainMenu } from './components/MainMenu';
 import { IntroScene } from './components/IntroScene';
 import { PeruMap } from './components/PeruMap';
@@ -30,7 +31,6 @@ export default function App() {
   const [costaCompleted, setCostaCompleted] = useState<boolean>(false);
   const [sierraCompleted, setSierraCompleted] = useState<boolean>(false);
 
-  // Estado para misiones individuales
   const [costaMissions, setCostaMissions] = useState({
     m1: false,
     m2: false,
@@ -68,7 +68,6 @@ export default function App() {
           missionsCompleted={costaMissions}
         />;
 
-      // Misiones de Costa accesibles sin orden
       case 'costa-m1':
         return <CostaMission1
           onNavigate={handleNavigate}
@@ -102,8 +101,10 @@ export default function App() {
   };
 
   return (
-    <div className="size-full min-h-screen overflow-x-hidden">
-      {renderScene()}
-    </div>
+    <LanguageProvider> {/* <-- Envolvemos toda la App */}
+      <div className="size-full min-h-screen overflow-x-hidden">
+        {renderScene()}
+      </div>
+    </LanguageProvider>
   );
 }

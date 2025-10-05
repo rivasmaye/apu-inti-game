@@ -1,11 +1,14 @@
+import React from "react";
+
 interface ResourceIconProps {
   type: "water" | "solar" | "biodiversity" | "satellite" | "sustainability";
   value?: number;
   showValue?: boolean;
   size?: "sm" | "md" | "lg";
+  label?: string; // <-- Permitimos pasar el label desde afuera
 }
 
-export function ResourceIcon({ type, value, showValue = false, size = "md" }: ResourceIconProps) {
+export function ResourceIcon({ type, value, showValue = false, size = "md", label }: ResourceIconProps) {
   const getIcon = () => {
     switch (type) {
       case "water":
@@ -20,23 +23,6 @@ export function ResourceIcon({ type, value, showValue = false, size = "md" }: Re
         return "♻️";
       default:
         return "🔆";
-    }
-  };
-
-  const getLabel = () => {
-    switch (type) {
-      case "water":
-        return "Agua";
-      case "solar":
-        return "Energía Solar";
-      case "biodiversity":
-        return "Biodiversidad";
-      case "satellite":
-        return "Datos NASA";
-      case "sustainability":
-        return "Sostenibilidad";
-      default:
-        return "Recurso";
     }
   };
 
@@ -57,7 +43,7 @@ export function ResourceIcon({ type, value, showValue = false, size = "md" }: Re
         <span className="block">{getIcon()}</span>
       </div>
       <div className="pr-3">
-        <p className="text-sm font-medium text-tierra">{getLabel()}</p>
+        <p className="text-sm font-medium text-tierra">{label ?? "Recurso"}</p>
         {showValue && value !== undefined && (
           <p className="text-xs text-tierra/70">{value}%</p>
         )}

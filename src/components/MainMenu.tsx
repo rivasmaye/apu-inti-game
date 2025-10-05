@@ -1,17 +1,29 @@
+import { useState } from "react";
 import { GameButton } from "./GameButton";
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useLanguage } from "../context/LanguageContext";
 
 interface MainMenuProps {
   onNavigate: (scene: string) => void;
 }
 
 export function MainMenu({ onNavigate }: MainMenuProps) {
+  const { language, setLanguage, t } = useLanguage();
+  const [showLangMenu, setShowLangMenu] = useState(false);
+
+  const toggleLanguageMenu = () => setShowLangMenu(prev => !prev);
+
+  const changeLanguage = (lang: "es" | "en") => {
+    setLanguage(lang);
+    setShowLangMenu(false);
+  };
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1580380598975-31777043edc7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxQZXJ1JTIwbWFwJTIwc2F0ZWxsaXRlJTIwdmlld3xlbnwxfHx8fDE3NTk2MTg5Njd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+          src="https://images.unsplash.com/photo-1580380598975-31777043edc7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
           alt="Mapa del Perú"
           className="w-full h-full object-cover"
         />
@@ -43,7 +55,6 @@ export function MainMenu({ onNavigate }: MainMenuProps) {
             Guardián del Perú
           </p>
           
-          {/* Decorative elements */}
           <div className="flex items-center justify-center mt-4 gap-4">
             <div className="w-12 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
             <span className="text-2xl">🌿</span>
@@ -59,7 +70,7 @@ export function MainMenu({ onNavigate }: MainMenuProps) {
             onClick={() => onNavigate('intro')}
             className="w-full"
           >
-            🎮 Jugar
+            {t.mainMenu.play}
           </GameButton>
           
           <GameButton 
@@ -68,17 +79,31 @@ export function MainMenu({ onNavigate }: MainMenuProps) {
             onClick={() => onNavigate('nasa')}
             className="w-full"
           >
-            📡 Centro NASA
+            {t.mainMenu.nasa}
           </GameButton>
           
-          <GameButton 
-            variant="costa" 
-            size="md"
-            onClick={() => {}}
-            className="w-full"
-          >
-            ⚙️ Opciones
-          </GameButton>
+          {/* Botón de Lenguaje */}
+          <div className="relative w-full">
+            <GameButton 
+              variant="costa" 
+              size="md"
+              onClick={toggleLanguageMenu}
+              className="w-full"
+            >
+              {t.mainMenu.language}
+            </GameButton>
+
+            {showLangMenu && (
+              <div className="absolute top-full left-0 mt-2 w-full bg-white/90 backdrop-blur-sm rounded-xl p-2 flex flex-col gap-2 game-shadow z-20">
+                <GameButton variant="secondary" size="sm" onClick={() => changeLanguage("es")}>
+                  Español
+                </GameButton>
+                <GameButton variant="secondary" size="sm" onClick={() => changeLanguage("en")}>
+                  English
+                </GameButton>
+              </div>
+            )}
+          </div>
           
           <GameButton 
             variant="selva" 
@@ -86,17 +111,16 @@ export function MainMenu({ onNavigate }: MainMenuProps) {
             onClick={() => {}}
             className="w-full"
           >
-            ℹ️ Créditos
+            {t.mainMenu.credits}
           </GameButton>
         </div>
 
-        {/* Bottom decorative text */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
           <p className="text-sm text-tierra/60">
-            Un juego educativo sobre conservación ambiental
+            {t.mainMenu.footer}
           </p>
           <p className="text-xs text-tierra/40 mt-1">
-            Con datos reales de la NASA 🛰️
+            {t.mainMenu.footer2}
           </p>
         </div>
       </div>

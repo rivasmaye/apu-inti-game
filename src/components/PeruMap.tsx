@@ -3,21 +3,24 @@ import { GameButton } from "./GameButton";
 import { GameHUD } from "./GameHUD";
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import personaje from '../assets/muñeco.png';
+import { useLanguage } from "../context/LanguageContext";
 
 interface PeruMapProps {
   onNavigate: (scene: string) => void;
 }
 
 export function PeruMap({ onNavigate }: PeruMapProps) {
+  const { t } = useLanguage();
+
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [characterPos, setCharacterPos] = useState<{ left: string; top: string; offsetY: number }>({ left: '50%', top: '80%', offsetY: 0 });
   const [footprints, setFootprints] = useState<Array<{ left: string; top: string; rotate: number; scale: number; opacity: number }>>([]);
   const isAnimatingRef = useRef(false);
 
   const regions = [
-    { id: "costa", name: "Costa", emoji: "🏖️", description: "Desierto costero con cultivos de irrigación", leftP: 7, topP: 45, color: "costa" },
-    { id: "sierra", name: "Sierra", emoji: "🏔️", description: "Montañas andinas con terrazas agrícolas", leftP: 50, topP: 15, color: "sierra" },
-    { id: "selva", name: "Selva", emoji: "🌳", description: "Bosque amazónico biodiverso", leftP: 92, topP: 50, color: "selva" }
+    { id: "costa", name: t.peruMap.costaScene.title, emoji: "🏖️", description: t.peruMap.costaScene.description, leftP: 7, topP: 45, color: "costa" },
+    { id: "sierra", name: t.peruMap.sierraScene.title, emoji: "🏔️", description: t.peruMap.sierraScene.description, leftP: 50, topP: 15, color: "sierra" },
+    { id: "selva", name: t.peruMap.selvaScene.title, emoji: "🌳", description: t.peruMap.selvaScene.description, leftP: 92, topP: 50, color: "selva" }
   ];
 
   const moveCharacterToRegion = (regionId: string) => {
@@ -96,8 +99,8 @@ export function PeruMap({ onNavigate }: PeruMapProps) {
 
       <div className="relative z-10 h-screen p-8 pt-32">
         <div className="text-center mb-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-tierra drop-shadow-lg mb-2">Mapa del Perú</h2>
-          <p className="text-lg text-tierra/80">Elige una región para comenzar tu misión</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-tierra drop-shadow-lg mb-2">{t.peruMap.mapTitle}</h2>
+          <p className="text-lg text-tierra/80">{t.peruMap.chooseRegion}</p>
         </div>
 
         <div className="relative h-96 max-w-4xl mx-auto">
@@ -116,9 +119,8 @@ export function PeruMap({ onNavigate }: PeruMapProps) {
                   <p className="text-sm text-tierra/70 mb-4">{region.description}</p>
                   <div className="space-y-2">
                     <GameButton variant={region.color as 'costa' | 'sierra' | 'selva'} size="sm" onClick={() => onNavigate(region.id)} className="w-full">
-                      🎯 Ir a {region.name}
+                      {t.peruMap.goToRegion} {region.name}
                     </GameButton>
-                    
                     <GameButton variant="secondary" size="sm" onClick={() => setSelectedRegion(null)} className="w-full">
                       ← Cerrar
                     </GameButton>
@@ -130,8 +132,8 @@ export function PeruMap({ onNavigate }: PeruMapProps) {
         </div>
 
         <div className="absolute bottom-8 left-8 right-8 flex justify-between">
-          <GameButton variant="secondary" onClick={() => onNavigate('menu')}>← Menú Principal</GameButton>
-          <GameButton variant="primary" onClick={() => onNavigate('nasa')}>📡 Centro NASA</GameButton>
+          <GameButton variant="secondary" onClick={() => onNavigate('menu')}>{t.peruMap.mainMenuBtn}</GameButton>
+          <GameButton variant="primary" onClick={() => onNavigate('nasa')}>{t.peruMap.nasaBtn}</GameButton>
         </div>
       </div>
     </div>
