@@ -1,0 +1,246 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: #F5E3B3;
+  --foreground: #573C26;
+  --card: #ffffff;
+  --card-foreground: #573C26;
+  --popover: oklch(1 0 0);
+  --popover-foreground: #573C26;
+  --primary: #E88E3A;
+  --primary-foreground: #ffffff;
+  --secondary: #5B8C85;
+  --secondary-foreground: #ffffff;
+  --muted: #F5E3B3;
+  --muted-foreground: #573C26;
+  --accent: #92CFAA;
+  --accent-foreground: #573C26;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(87, 60, 38, 0.2);
+  --input: transparent;
+  --input-background: rgba(255, 255, 255, 0.8);
+  --switch-background: #cbced4;
+  --font-weight-medium: 600;
+  --font-weight-normal: 400;
+  --ring: #E88E3A;
+  --chart-1: #E88E3A;
+  --chart-2: #92CFAA;
+  --chart-3: #5B8C85;
+  --chart-4: #F5E3B3;
+  --chart-5: #573C26;
+  --radius: 0.875rem;
+  --sidebar: #F5E3B3;
+  --sidebar-foreground: #573C26;
+  --sidebar-primary: #E88E3A;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #92CFAA;
+  --sidebar-accent-foreground: #573C26;
+  --sidebar-border: rgba(87, 60, 38, 0.2);
+  --sidebar-ring: #E88E3A;
+  
+  /* Game specific colors */
+  --color-costa: #F5E3B3;
+  --color-sierra: #5B8C85;
+  --color-selva: #92CFAA;
+  --color-sol: #E88E3A;
+  --color-tierra: #573C26;
+}
+
+.dark {
+  --background: #573C26;
+  --foreground: #F5E3B3;
+  --card: #573C26;
+  --card-foreground: #F5E3B3;
+  --popover: #573C26;
+  --popover-foreground: #F5E3B3;
+  --primary: #E88E3A;
+  --primary-foreground: #573C26;
+  --secondary: #5B8C85;
+  --secondary-foreground: #F5E3B3;
+  --muted: #5B8C85;
+  --muted-foreground: #F5E3B3;
+  --accent: #92CFAA;
+  --accent-foreground: #573C26;
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: rgba(245, 227, 179, 0.2);
+  --input: rgba(245, 227, 179, 0.1);
+  --ring: #E88E3A;
+  --font-weight-medium: 600;
+  --font-weight-normal: 400;
+  --chart-1: #E88E3A;
+  --chart-2: #92CFAA;
+  --chart-3: #5B8C85;
+  --chart-4: #F5E3B3;
+  --chart-5: #573C26;
+  --sidebar: #573C26;
+  --sidebar-foreground: #F5E3B3;
+  --sidebar-primary: #E88E3A;
+  --sidebar-primary-foreground: #573C26;
+  --sidebar-accent: #5B8C85;
+  --sidebar-accent-foreground: #F5E3B3;
+  --sidebar-border: rgba(245, 227, 179, 0.2);
+  --sidebar-ring: #E88E3A;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-costa: var(--color-costa);
+  --color-sierra: var(--color-sierra);
+  --color-selva: var(--color-selva);
+  --color-sol: var(--color-sol);
+  --color-tierra: var(--color-tierra);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito', 'Poppins', sans-serif;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+      font-family: 'Righteous', 'Inca Display', cursive;
+    }
+
+    h2 {
+      font-size: 1.875rem;
+      font-weight: 600;
+      line-height: 1.3;
+      font-family: 'Righteous', 'Inca Display', cursive;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.4;
+      font-family: 'Righteous', 'Inca Display', cursive;
+    }
+
+    h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Game specific utility classes */
+@layer utilities {
+  .bg-costa {
+    background-color: var(--color-costa);
+  }
+  
+  .bg-sierra {
+    background-color: var(--color-sierra);
+  }
+  
+  .bg-selva {
+    background-color: var(--color-selva);
+  }
+  
+  .bg-sol {
+    background-color: var(--color-sol);
+  }
+  
+  .bg-tierra {
+    background-color: var(--color-tierra);
+  }
+  
+  .text-tierra {
+    color: var(--color-tierra);
+  }
+  
+  .border-textil {
+    border-image: repeating-linear-gradient(
+      45deg,
+      var(--color-sol),
+      var(--color-sol) 10px,
+      var(--color-sierra) 10px,
+      var(--color-sierra) 20px
+    ) 1;
+  }
+  
+  .game-shadow {
+    box-shadow: 0 8px 16px rgba(87, 60, 38, 0.3), 0 4px 8px rgba(87, 60, 38, 0.1);
+  }
+}
