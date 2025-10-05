@@ -67,7 +67,7 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
         {/* Título */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-tierra drop-shadow-lg mb-2">
-            🏖️ {t.peruMap.costaScene.title}
+            {t.peruMap.costaScene.title}
           </h2>
           <p className="text-lg text-tierra/80">
             {t.peruMap.costaScene.description}
@@ -102,17 +102,17 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
           <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 game-shadow">
             <div className="text-center mb-4">
               <span className="text-4xl mb-2 block">💧</span>
-              <h3 className="font-bold text-tierra">Regar Cultivos</h3>
+              <h3 className="font-bold text-tierra">{t.hud.irrigate}</h3>
             </div>
             <div className="flex justify-between mb-2 text-sm">
-              <span>Nivel de agua:</span>
+              <span>{t.resources.water}:</span>
               <span className="font-bold">{waterLevel}%</span>
             </div>
             <div className="w-full bg-gray-200 h-2 rounded-full">
               <div style={{ width: `${waterLevel}%` }} className="bg-blue-500 h-2 rounded-full transition-all duration-500"></div>
             </div>
             <GameButton variant="costa" size="sm" onClick={handleIrrigate} className="w-full mt-2" disabled={waterLevel >= 100}>
-              💦 Regar
+              💦 {t.hud.irrigate}
             </GameButton>
           </div>
 
@@ -120,17 +120,17 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
           <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 game-shadow">
             <div className="text-center mb-4">
               <span className="text-4xl mb-2 block">🌱</span>
-              <h3 className="font-bold text-tierra">Sembrar Plantas</h3>
+              <h3 className="font-bold text-tierra">{t.hud.plant}</h3>
             </div>
             <div className="flex justify-between mb-2 text-sm">
-              <span>Ecosistema:</span>
+              <span>{t.resources.ecosystem}:</span>
               <span className="font-bold">{ecosystem}%</span>
             </div>
             <div className="w-full bg-gray-200 h-2 rounded-full">
               <div style={{ width: `${ecosystem}%` }} className="bg-green-500 h-2 rounded-full transition-all duration-500"></div>
             </div>
             <GameButton variant="selva" size="sm" onClick={handlePlant} className="w-full mt-2" disabled={waterLevel < 20 || ecosystem >= 100}>
-              🌿 Sembrar
+              🌿 {t.hud.plant}
             </GameButton>
           </div>
 
@@ -138,17 +138,17 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
           <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 game-shadow">
             <div className="text-center mb-4">
               <span className="text-4xl mb-2 block">☀️</span>
-              <h3 className="font-bold text-tierra">Optimizar Energía</h3>
+              <h3 className="font-bold text-tierra">{t.hud.energy}</h3>
             </div>
             <div className="flex justify-between mb-2 text-sm">
-              <span>Energía:</span>
+              <span>{t.resources.energy}:</span>
               <span className="font-bold">{energy}%</span>
             </div>
             <div className="w-full bg-gray-200 h-2 rounded-full">
               <div style={{ width: `${energy}%` }} className="bg-yellow-500 h-2 rounded-full transition-all duration-500"></div>
             </div>
             <GameButton variant="primary" size="sm" onClick={() => setEnergy(Math.min(100, energy + 5))} className="w-full mt-2" disabled={energy >= 100}>
-              ⚡ Cargar Paneles
+              ⚡ {t.hud.energy}
             </GameButton>
           </div>
         </div>
@@ -156,12 +156,12 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
         {/* Botones de acción */}
         <div className="flex justify-center gap-4 mt-8">
           <GameButton variant="primary" onClick={() => setShowDataPanel(true)} className="flex items-center gap-2">
-            📡 Consultar Datos NASA
+            📡 {t.peruMap.nasaBtn}
           </GameButton>
 
           {ecosystem >= 70 && (
             <GameButton variant="costa" onClick={() => onNavigate('map')} className="animate-pulse">
-              ✅ Misión Completada
+              ✅ {t.missions.startMission} Completada
             </GameButton>
           )}
         </div>

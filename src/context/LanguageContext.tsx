@@ -10,7 +10,8 @@ const translations = {
       credits: "ℹ️ Créditos",
       footer: "© 2025 Apu Inti",
       footer2: "Desarrollado por tu equipo educativo",
-      guardian: "Guardián del Perú"
+      guardian: "Guardián del Perú",
+      menuBtn: "Menú Principal"
     },
     introScene: {
       storyTexts: [
@@ -78,10 +79,28 @@ const translations = {
         ]
       }
     },
-    hud: {
-      irrigate: "💧 Regar Cultivos",
-      plant: "🌱 Sembrar Plantas",
-      energy: "⚡ Optimizar Energía"
+    nasa: {
+      statusInProgress: "En progreso",
+      statusStarted: "Iniciado",
+      statusAlmostDone: "Casi completo",
+      missionProgress: "Progreso de Misiones",
+      completed: "completo",
+      totalImpact: "Impacto Total",
+      ecosystemRestoration: "Restauración del ecosistema peruano",
+      satelliteData: "Datos Satelitales en Tiempo Real",
+      controlRoom: "Sala de Control de Monitoreo Satelital",
+      viewDetails: "Ver detalles →",
+      goToMissionMap: "Ir al Mapa de Misiones",
+      ndviTitle: "Índice de Vegetación (NDVI)",
+      ndviDescription: "Salud de la vegetación medida por satélites",
+      precipitationTitle: "Precipitación",
+      precipitationDescription: "Lluvia anual promedio",
+      temperatureTitle: "Temperatura",
+      temperatureDescription: "Temperatura promedio nacional",
+      deforestationTitle: "Deforestación",
+      deforestationDescription: "Pérdida de bosques anual",
+      national: "Nacional",
+      amazon: "Amazonía"
     }
   },
   en: {
@@ -92,7 +111,8 @@ const translations = {
       credits: "ℹ️ Credits",
       footer: "© 2025 Apu Inti",
       footer2: "Developed by your educational team",
-      guardian: "Guardian of Peru"
+      guardian: "Guardian of Peru",
+      menuBtn: "Main Menu"
     },
     introScene: {
       storyTexts: [
@@ -160,10 +180,28 @@ const translations = {
         ]
       }
     },
-    hud: {
-      irrigate: "💧 Irrigate Crops",
-      plant: "🌱 Plant Crops",
-      energy: "⚡ Optimize Energy"
+    nasa: {
+      statusInProgress: "In progress",
+      statusStarted: "Started",
+      statusAlmostDone: "Almost done",
+      missionProgress: "Mission Progress",
+      completed: "completed",
+      totalImpact: "Total Impact",
+      ecosystemRestoration: "Peruvian ecosystem restoration",
+      satelliteData: "Real-Time Satellite Data",
+      controlRoom: "Satellite Monitoring Control Room",
+      viewDetails: "View details →",
+      goToMissionMap: "Go to Mission Map",
+      ndviTitle: "Vegetation Index (NDVI)",
+      ndviDescription: "Vegetation health measured by satellites",
+      precipitationTitle: "Precipitation",
+      precipitationDescription: "Average annual rainfall",
+      temperatureTitle: "Temperature",
+      temperatureDescription: "National average temperature",
+      deforestationTitle: "Deforestation",
+      deforestationDescription: "Annual forest loss",
+      national: "National",
+      amazon: "Amazon"
     }
   }
 };
