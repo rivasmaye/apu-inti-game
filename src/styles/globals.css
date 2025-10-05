@@ -243,4 +243,14 @@ html {
   .game-shadow {
     box-shadow: 0 8px 16px rgba(87, 60, 38, 0.3), 0 4px 8px rgba(87, 60, 38, 0.1);
   }
+
+  @keyframes grow {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+  
+  .animate-grow {
+    animation: grow 1.5s ease-out forwards;
+  }
+  
 }
