@@ -3,6 +3,7 @@ import { GameButton } from "./GameButton";
 import { GameHUD } from "./GameHUD";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
+
 // 🧩 Preguntas de la Misión Costa
 const questions = [
   {

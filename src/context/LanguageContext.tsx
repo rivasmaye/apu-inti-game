@@ -60,11 +60,13 @@ const translations = {
       soilHumidity: "Humedad del Suelo",
       precipitation: "Precipitación",
       ndvi: "Índice de Vegetación (NDVI)",
-      solarRadiation: "Radiación Solar"
+      solarRadiation: "Radiación Solar",
+      waterStress: "Estrés Hídrico"
     },
     missions: {
       startMission: "Iniciar misión",
       costa: {
+        regionName: "Costa",
         m1: {
           title: "Misión 1: El Desafío del Saber",
           description: "Responde correctamente las preguntas para evitar la sequía en los valles costeros."
@@ -90,7 +92,8 @@ const translations = {
           { label: "Humedad del Suelo", value: "15%" },
           { label: "Precipitación", value: "2.1 mm" },
           { label: "Índice de Vegetación (NDVI)", value: "0.23" },
-          { label: "Radiación Solar", value: "850 W/m²" }
+          { label: "Radiación Solar", value: "850 W/m²" },
+          { label: "Estrés Hídrico", value: "800 m³" }
         ]
       }
     },
@@ -114,8 +117,12 @@ const translations = {
       temperatureDescription: "Temperatura promedio nacional",
       deforestationTitle: "Deforestación",
       deforestationDescription: "Pérdida de bosques anual",
+      estresHidricoTitle: "Estrés Hídrico",
+      estresHidricoDescription: "Disminución de producción agrícola",
       national: "Nacional",
-      amazon: "Amazonía"
+      amazon: "Amazonía",
+      footer: "Datos proporcionados por NASA Earth Observing System",
+      footerSources: "🛰️ Landsat 8 • MODIS • VIIRS • GPM"
     }
   },
   en: {
@@ -176,11 +183,13 @@ const translations = {
       soilHumidity: "Soil Humidity",
       precipitation: "Precipitation",
       ndvi: "Vegetation Index (NDVI)",
-      solarRadiation: "Solar Radiation"
+      solarRadiation: "Solar Radiation",
+      waterStress: "Water Stress"
     },
     missions: {
       startMission: "Start Mission",
       costa: {
+        regionName: "Coast",
         m1: {
           title: "Mission 1: Challenge of Knowledge",
           description: "Answer correctly to prevent drought in coastal valleys."
@@ -206,7 +215,8 @@ const translations = {
           { label: "Soil Humidity", value: "15%" },
           { label: "Precipitation", value: "2.1 mm" },
           { label: "Vegetation Index (NDVI)", value: "0.23" },
-          { label: "Solar Radiation", value: "850 W/m²" }
+          { label: "Solar Radiation", value: "850 W/m²" },
+          { label: "Water Stress", value: "800 m³" }
         ]
       }
     },
@@ -230,8 +240,12 @@ const translations = {
       temperatureDescription: "National average temperature",
       deforestationTitle: "Deforestation",
       deforestationDescription: "Annual forest loss",
+      estresHidricoTitle: "Water Stress",
+      estresHidricoDescription: "Decrease in agricultural production",
       national: "National",
-      amazon: "Amazon"
+      amazon: "Amazon",
+      footer: "Data provided by NASA Earth Observing System",
+      footerSources: "🛰️ Landsat 8 • MODIS • VIIRS • GPM"
     }
   }
 };
@@ -239,7 +253,7 @@ const translations = {
 interface LanguageContextType {
   language: "es" | "en";
   setLanguage: (lang: "es" | "en") => void;
-  t: typeof translations[keyof typeof translations]; // <- flexible para todos los idiomas
+  t: typeof translations[keyof typeof translations];
 }
 
 const LanguageContext = createContext<LanguageContextType>({

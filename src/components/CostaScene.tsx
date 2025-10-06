@@ -190,7 +190,7 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
             onClick={() => onNavigate('nasa')}
             className="flex items-center gap-2"
           >
-            📡 {t.peruMap.nasaBtn}
+            {t.peruMap.nasaBtn}
           </GameButton>
 
           {ecosystem >= 70 && (
@@ -205,10 +205,20 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
         </div>
       </div>
 
-      {/* Botón volver al mapa */}
+      {/* Botón volver al mapa (izquierda) */}
       <div className="absolute bottom-8 left-8">
         <GameButton variant="secondary" onClick={() => onNavigate("map")}>
           {t.peruMap.mainMenuBtn}
+        </GameButton>
+      </div>
+
+      {/* Botones para Sierra y Selva (derecha) */}
+      <div className="absolute bottom-8 right-8 flex gap-2">
+        <GameButton variant="sierra" onClick={() => onNavigate("sierra")}>
+          🏔️ {t.peruMap.sierraBtn}
+        </GameButton>
+        <GameButton variant="selva" onClick={() => onNavigate("selva")}>
+          🌳 {t.peruMap.selvaBtn}
         </GameButton>
       </div>
     </div>

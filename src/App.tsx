@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { LanguageProvider } from './context/LanguageContext'; // <-- Importa el provider
+import { LanguageProvider } from './context/LanguageContext';
+import { MissionsProvider } from './context/MissionsContext';
 import { MainMenu } from './components/MainMenu';
 import { IntroScene } from './components/IntroScene';
 import { PeruMap } from './components/PeruMap';
@@ -102,9 +103,11 @@ export default function App() {
 
   return (
     <LanguageProvider> {/* <-- Envolvemos toda la App */}
-      <div className="size-full min-h-screen overflow-x-hidden">
-        {renderScene()}
-      </div>
+      <MissionsProvider> {/* <-- Nuevo: proveemos el contexto de misiones */}
+        <div className="size-full min-h-screen overflow-x-hidden">
+          {renderScene()}
+        </div>
+      </MissionsProvider>
     </LanguageProvider>
   );
 }
