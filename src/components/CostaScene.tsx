@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { GameButton } from "./GameButton";
 import { GameHUD } from "./GameHUD";
-import { DataPanel } from "./DataPanel";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -11,19 +10,19 @@ interface CostaSceneProps {
 
 export function CostaScene({ onNavigate }: CostaSceneProps) {
   const { t } = useLanguage();
-  const [showDataPanel, setShowDataPanel] = useState(false);
 
   // Estados de HUD e interacciones
   const [waterLevel, setWaterLevel] = useState(45);
   const [energy, setEnergy] = useState(75);
   const [ecosystem, setEcosystem] = useState(30);
 
+  // Datos satelitales traducibles
   const nasaData = [
-    { label: "Temperatura", value: "28.5", unit: "°C", status: "warning" },
-    { label: "Humedad del Suelo", value: "15", unit: "%", status: "danger" },
-    { label: "Precipitación", value: "2.1", unit: "mm", status: "danger" },
-    { label: "Índice de Vegetación", value: "0.23", unit: "NDVI", status: "warning" },
-    { label: "Radiación Solar", value: "850", unit: "W/m²", status: "good" }
+    { label: t.resources.temperature, value: "28.5", unit: "°C", status: "warning" },
+    { label: t.resources.soilHumidity, value: "15", unit: "%", status: "danger" },
+    { label: t.resources.precipitation, value: "2.1", unit: "mm", status: "danger" },
+    { label: t.resources.ndvi, value: "0.23", unit: "NDVI", status: "warning" },
+    { label: t.resources.solarRadiation, value: "850", unit: "W/m²", status: "good" }
   ];
 
   const handleIrrigate = () => {
@@ -40,7 +39,7 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
 
   return (
     <div className="min-h-screen relative overflow-x-hidden cursor-[url('/cursor-apuinti.png'),_auto]">
-      
+
       {/* HUD */}
       <GameHUD
         ecosystem={ecosystem}
@@ -63,7 +62,7 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
 
       {/* Contenido principal */}
       <div className="relative z-10 min-h-screen p-8 pt-32 pb-24 overflow-y-auto">
-        
+
         {/* Título */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-tierra drop-shadow-lg mb-2">
@@ -76,8 +75,11 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
 
         {/* Misiones */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[1,2,3].map((m) => (
-            <div key={m} className="bg-white/90 backdrop-blur-sm rounded-xl p-6 game-shadow border border-yellow-200/60 transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:-translate-y-2">
+          {[1, 2, 3].map((m) => (
+            <div
+              key={m}
+              className="bg-white/90 backdrop-blur-sm rounded-xl p-6 game-shadow border border-yellow-200/60 transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:-translate-y-2"
+            >
               <h3 className="font-bold text-tierra text-xl mb-2">
                 {m === 1 ? "🌞" : m === 2 ? "🐟" : "🧹"} {t.missions.costa[`m${m}`].title}
               </h3>
@@ -85,7 +87,7 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
                 {t.missions.costa[`m${m}`].description}
               </p>
               <GameButton
-                variant={m===3 ? "secondary" : "primary"}
+                variant={m === 3 ? "secondary" : "primary"}
                 size="sm"
                 onClick={() => onNavigate(`costa-m${m}`)}
                 className="w-full"
@@ -98,6 +100,7 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
 
         {/* Interacciones: Agua, Plantación, Energía */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-12">
+
           {/* Riego */}
           <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 game-shadow">
             <div className="text-center mb-4">
@@ -109,9 +112,18 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
               <span className="font-bold">{waterLevel}%</span>
             </div>
             <div className="w-full bg-gray-200 h-2 rounded-full">
-              <div style={{ width: `${waterLevel}%` }} className="bg-blue-500 h-2 rounded-full transition-all duration-500"></div>
+              <div
+                style={{ width: `${waterLevel}%` }}
+                className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+              ></div>
             </div>
-            <GameButton variant="costa" size="sm" onClick={handleIrrigate} className="w-full mt-2" disabled={waterLevel >= 100}>
+            <GameButton
+              variant="costa"
+              size="sm"
+              onClick={handleIrrigate}
+              className="w-full mt-2"
+              disabled={waterLevel >= 100}
+            >
               💦 {t.hud.irrigate}
             </GameButton>
           </div>
@@ -127,9 +139,18 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
               <span className="font-bold">{ecosystem}%</span>
             </div>
             <div className="w-full bg-gray-200 h-2 rounded-full">
-              <div style={{ width: `${ecosystem}%` }} className="bg-green-500 h-2 rounded-full transition-all duration-500"></div>
+              <div
+                style={{ width: `${ecosystem}%` }}
+                className="bg-green-500 h-2 rounded-full transition-all duration-500"
+              ></div>
             </div>
-            <GameButton variant="selva" size="sm" onClick={handlePlant} className="w-full mt-2" disabled={waterLevel < 20 || ecosystem >= 100}>
+            <GameButton
+              variant="selva"
+              size="sm"
+              onClick={handlePlant}
+              className="w-full mt-2"
+              disabled={waterLevel < 20 || ecosystem >= 100}
+            >
               🌿 {t.hud.plant}
             </GameButton>
           </div>
@@ -145,9 +166,18 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
               <span className="font-bold">{energy}%</span>
             </div>
             <div className="w-full bg-gray-200 h-2 rounded-full">
-              <div style={{ width: `${energy}%` }} className="bg-yellow-500 h-2 rounded-full transition-all duration-500"></div>
+              <div
+                style={{ width: `${energy}%` }}
+                className="bg-yellow-500 h-2 rounded-full transition-all duration-500"
+              ></div>
             </div>
-            <GameButton variant="primary" size="sm" onClick={() => setEnergy(Math.min(100, energy + 5))} className="w-full mt-2" disabled={energy >= 100}>
+            <GameButton
+              variant="primary"
+              size="sm"
+              onClick={() => setEnergy(Math.min(100, energy + 5))}
+              className="w-full mt-2"
+              disabled={energy >= 100}
+            >
               ⚡ {t.hud.energy}
             </GameButton>
           </div>
@@ -155,21 +185,25 @@ export function CostaScene({ onNavigate }: CostaSceneProps) {
 
         {/* Botones de acción */}
         <div className="flex justify-center gap-4 mt-8">
-          <GameButton variant="primary" onClick={() => setShowDataPanel(true)} className="flex items-center gap-2">
+          <GameButton
+            variant="primary"
+            onClick={() => onNavigate('nasa')}
+            className="flex items-center gap-2"
+          >
             📡 {t.peruMap.nasaBtn}
           </GameButton>
 
           {ecosystem >= 70 && (
-            <GameButton variant="costa" onClick={() => onNavigate('map')} className="animate-pulse">
+            <GameButton
+              variant="costa"
+              onClick={() => onNavigate('map')}
+              className="animate-pulse"
+            >
               ✅ {t.missions.startMission} Completada
             </GameButton>
           )}
         </div>
-
       </div>
-
-      {/* Panel de datos */}
-      <DataPanel title={t.dataPanel.costa.title} data={nasaData} isVisible={showDataPanel} onClose={() => setShowDataPanel(false)} />
 
       {/* Botón volver al mapa */}
       <div className="absolute bottom-8 left-8">

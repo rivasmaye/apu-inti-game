@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { useLanguage } from "../context/LanguageContext"; // <- importamos el hook
 
 interface DataPanelProps {
   title: string;
@@ -14,6 +15,8 @@ interface DataPanelProps {
 }
 
 export function DataPanel({ title, data, isVisible, onClose }: DataPanelProps) {
+  const { t } = useLanguage(); // <- obtenemos la traducción
+
   if (!isVisible) return null;
 
   const getStatusColor = (status?: string) => {
@@ -44,9 +47,10 @@ export function DataPanel({ title, data, isVisible, onClose }: DataPanelProps) {
           </button>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* Título traducido para datos en tiempo real */}
           <div className="flex items-center gap-2 mb-4">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-tierra/70">Datos en tiempo real de NASA</span>
+            <span className="text-sm text-tierra/70">{t.nasa.satelliteData}</span>
           </div>
           
           {data.map((item, index) => (

@@ -45,12 +45,22 @@ const translations = {
       nasaBtn: "📡 Centro NASA",
       goToRegion: "🎯 Ir a"
     },
+    hud: {
+      irrigate: "Riego",
+      plant: "Plantación",
+      energy: "Energía"
+    },
     resources: {
       ecosystem: "Ecosistema",
       water: "Agua",
       energy: "Energía",
       biodiversity: "Biodiversidad",
-      sustainability: "Sostenibilidad"
+      sustainability: "Sostenibilidad",
+      temperature: "Temperatura",
+      soilHumidity: "Humedad del Suelo",
+      precipitation: "Precipitación",
+      ndvi: "Índice de Vegetación (NDVI)",
+      solarRadiation: "Radiación Solar"
     },
     missions: {
       startMission: "Iniciar misión",
@@ -75,7 +85,12 @@ const translations = {
         data: [
           { label: "Lluvia promedio Lima", value: "200 mm/año" },
           { label: "Temperatura El Niño", value: "+6 °C" },
-          { label: "Basura marina", value: "80% proviene de tierra" }
+          { label: "Basura marina", value: "80% proviene de tierra" },
+          { label: "Temperatura", value: "28.5 °C" },
+          { label: "Humedad del Suelo", value: "15%" },
+          { label: "Precipitación", value: "2.1 mm" },
+          { label: "Índice de Vegetación (NDVI)", value: "0.23" },
+          { label: "Radiación Solar", value: "850 W/m²" }
         ]
       }
     },
@@ -146,12 +161,22 @@ const translations = {
       nasaBtn: "📡 NASA Center",
       goToRegion: "🎯 Go to"
     },
+    hud: {
+      irrigate: "Irrigate",
+      plant: "Plant",
+      energy: "Energy"
+    },
     resources: {
       ecosystem: "Ecosystem",
       water: "Water",
       energy: "Energy",
       biodiversity: "Biodiversity",
-      sustainability: "Sustainability"
+      sustainability: "Sustainability",
+      temperature: "Temperature",
+      soilHumidity: "Soil Humidity",
+      precipitation: "Precipitation",
+      ndvi: "Vegetation Index (NDVI)",
+      solarRadiation: "Solar Radiation"
     },
     missions: {
       startMission: "Start Mission",
@@ -176,7 +201,12 @@ const translations = {
         data: [
           { label: "Average Rain Lima", value: "200 mm/year" },
           { label: "El Niño Temperature", value: "+6 °C" },
-          { label: "Marine Debris", value: "80% comes from land" }
+          { label: "Marine Debris", value: "80% comes from land" },
+          { label: "Temperature", value: "28.5 °C" },
+          { label: "Soil Humidity", value: "15%" },
+          { label: "Precipitation", value: "2.1 mm" },
+          { label: "Vegetation Index (NDVI)", value: "0.23" },
+          { label: "Solar Radiation", value: "850 W/m²" }
         ]
       }
     },
@@ -209,7 +239,7 @@ const translations = {
 interface LanguageContextType {
   language: "es" | "en";
   setLanguage: (lang: "es" | "en") => void;
-  t: typeof translations.es;
+  t: typeof translations[keyof typeof translations]; // <- flexible para todos los idiomas
 }
 
 const LanguageContext = createContext<LanguageContextType>({
